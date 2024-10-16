@@ -14,11 +14,29 @@ namespace Montercarlo
                 return;
             }
 
+            if (textBox1.Text.Equals("") || textBox2.Text.Equals("") || textBox3.Text.Equals("") || textBox4.Text.Equals("") || textBox5.Text.Equals(""))
+            {
+                MessageBox.Show("Los números tienen que ser MAYOR que cero, NO VACÍOS");
+                return;
+            }
+
             int NoPan = Convert.ToInt32(textBox1.Text);
             int MinPan = Convert.ToInt32(textBox2.Text);
             int MinVida = Convert.ToInt32(textBox3.Text);
             int MaxVida = Convert.ToInt32(textBox4.Text);
             int NoSim = Convert.ToInt32(textBox5.Text);
+
+            if ( NoPan <= 0 || MinPan <= 0 || MinVida <= 0 || MaxVida <= 0 || NoSim <= 0)
+            {
+                MessageBox.Show("Los números tienen que ser enteros MAYORES que cero");
+                return;
+            }
+
+            if (NoPan <= MinPan || MinVida >= MaxVida)
+            {
+                MessageBox.Show("Revisa los limites de Paneles y Vida");
+                return;
+            }
 
             ClassMT montecarlo = new ClassMT();
             List<List<int>> listaSalida = montecarlo.SimSatelite(MinPan,NoPan,MinVida,MaxVida,NoSim);
